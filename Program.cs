@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,12 @@ namespace Main
             string afterWord = beforeWord;
             string inputWord = afterWord;
             char hider = '*';
+            bool error = false;
             bool unmatched = true;
             bool play = false;
             int tries = beforeWord.Length;
             int tried = 0;
+            char guess;
 
             for (int i = 0; i < afterWord.Length; i++)
             {
@@ -36,9 +39,13 @@ namespace Main
             
             do
             {
-                Console.WriteLine("y or n");
-                char yesNo = char.Parse(Console.ReadLine());
-                if (yesNo == 'y') { play = true; Console.Beep(); } else if (yesNo == 'n') { play = false; Console.Beep(); }
+                try
+                {
+                    Console.WriteLine("y or n");
+                    char yesNo = char.Parse(Console.ReadLine());
+                    if (yesNo == 'y') { play = true; } else if (yesNo == 'n') { play = false;  }
+                }
+                catch (FormatException e) { Console.Beep(); Console.WriteLine("Please enter y for Yes or n for No"); }
             }
             while (!play);
             
@@ -46,9 +53,16 @@ namespace Main
             {
                 Console.WriteLine("<>{0}<>", afterWord);
                 Console.WriteLine("<>{0}/{1}<>", tried,tries);
+                Console.WriteLine("<>Word length is: {0}<>",beforeWord.Length);
 
                 Console.WriteLine("See if you can guess the word, enter a letter now");
-                char guess = char.Parse(Console.ReadLine()); Console.Clear(); tried++;
+
+                try
+                {
+
+                guess = char.Parse(Console.ReadLine());
+                
+                Console.Clear(); tried++;
                 if(tried > tries) { break; }
                 for (int i = 0; i < afterWord.Length; i++)
                 {
@@ -56,10 +70,14 @@ namespace Main
                     { 
                         afterWord= afterWord.Remove(i,1); 
                         afterWord = afterWord.Insert(i, guess.ToString());
-                        Console.Beep();
                     }
                    if (!afterWord.Contains('*')) { unmatched = false; play = false; }
 
+                }
+                }
+                catch (FormatException e)
+                {
+                    Console.Beep(); Console.WriteLine("Did you try just ONE letter?");
                 }
             } while (unmatched);
 
