@@ -30,11 +30,9 @@ namespace Main
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Can you save him from the gallows?");
-            Console.WriteLine("y or n");
             do
             {
-
-
+                Console.WriteLine("y or n");
                 char yesNo = char.Parse(Console.ReadLine());
                 if (yesNo == 'y') { play = true; Console.Beep(); } else if (yesNo == 'n') { play = false; Console.Beep(); }
             }
@@ -53,7 +51,7 @@ namespace Main
                         afterWord = afterWord.Insert(i, guess.ToString());
                         Console.Beep();
                     }
-                   if (!afterWord.Contains('*')) { unmatched = false; }
+                   if (!afterWord.Contains('*')) { unmatched = false; play = false; }
 
                 }
             } while (unmatched);
