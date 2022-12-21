@@ -11,58 +11,22 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            HideWords hiddenword = new HideWords();
-            GameWords gamewords = new GameWords();
-            Randomizer randomizer= new Randomizer();
-            int r = 0;
-            r = randomizer.selector(r);
-            Console.WriteLine("Hello World!");
-            Console.WriteLine("Let's make Hangman!");
-            string p = string.Empty;
-            hiddenword.hide_word(gamewords.words(r, p));
+            Random random = new Random();
+            string[] words = { "Nintendo","Sony","Sega","Microsoft" };
+            int randomNumber = random.Next(words.Length);
+            string beforeWord = words[randomNumber];
+            string afterWord = beforeWord;
+            char hider = '*';
 
-
-        }
-    }
-    class GameWords
-    {
-        private string[] gwords { get; set; }
-        private int selected { get; set; }
-
-        public string words(int selected,string p)
-        {
-
-            string[] gwords = {"Pumpkin","Candy","Skeleton"};
-            return p = gwords[selected].ToString();
-        }
-    }
-    class Randomizer
-    {
-        GameWords G = new GameWords();
-        private int r { get; set; }
-        Random random = new Random();
-        public int selector(int r)
-        {
-          r = random.Next(0,3);
-          return r;
-            
-        }
-    }
-    class HideWords
-    {
-        private string hiddenword { get; set; }
-        public void hide_word(string hiddenword)
-        {
-            char[] letters = hiddenword.ToCharArray();
-            for (int i = 0; i < hiddenword.Length; i++)
+            for (int i = 0; i < afterWord.Length; i++)
             {
-                hiddenword.Replace(hiddenword[i], '*');
-
-                Console.Write(letters[i].ToString().Replace(letters[i], '*'));
+                afterWord = afterWord.Replace(afterWord[i], hider);
 
             }
-
+            Console.WriteLine("Before the word was encrypted it was {0}. Then, after it was encrypted it was {1}.",beforeWord,afterWord);
+            Console.WriteLine("Before the word was encrypted it was {0} letters. Then, after it was encrypted it was {1} letters.",beforeWord.Length,afterWord.Length);
         }
+    
     }
 
 }
