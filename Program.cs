@@ -20,6 +20,8 @@ namespace Main
             char hider = '*';
             bool unmatched = true;
             bool play = false;
+            int tries = beforeWord.Length;
+            int tried = 0;
 
             for (int i = 0; i < afterWord.Length; i++)
             {
@@ -43,9 +45,11 @@ namespace Main
             do
             {
                 Console.WriteLine("<>{0}<>", afterWord);
+                Console.WriteLine("<>{0}/{1}<>", tried,tries);
 
                 Console.WriteLine("See if you can guess the word, enter a letter now");
-                char guess = char.Parse(Console.ReadLine()); Console.Clear(); 
+                char guess = char.Parse(Console.ReadLine()); Console.Clear(); tried++;
+                if(tried > tries) { break; }
                 for (int i = 0; i < afterWord.Length; i++)
                 {
                     if (beforeWord[i] == guess) 
@@ -62,7 +66,7 @@ namespace Main
             if (!unmatched) 
             { 
                 Console.WriteLine("You got it, the word was {0}", afterWord); 
-            }else { Console.WriteLine("See ya later"); }
+            }else { Console.WriteLine("You lost, the man was hung! By the way, the word was {0}",beforeWord); }
             
 
         }
