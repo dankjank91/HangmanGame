@@ -32,10 +32,10 @@ namespace Main
                 afterWord = afterWord.Insert(i,hider.ToString());
             }
 
-            Console.WriteLine("HANGMAN");
+            Console.WriteLine("Coder HANGMAN: Save the programmer!");
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("Can you save him from the gallows?");
+            Console.WriteLine("Can you save the programmer from the gallows?");
             
             do
             {
@@ -45,12 +45,13 @@ namespace Main
                     char yesNo = char.Parse(Console.ReadLine());
                     if (yesNo == 'y') { play = true; } else if (yesNo == 'n') { play = false;  }
                 }
-                catch (FormatException e) { Console.Beep(); Console.WriteLine("Please enter y for Yes or n for No"); }
+                catch (FormatException e) { Console.Beep(); Console.WriteLine("Format Exception: Enter only one letter please");Console.WriteLine("Please enter y for Yes or n for No"); }
             }
             while (!play);
             
             do
             {
+                Console.WriteLine("Coder HANGMAN: Save the programmer!");
                 Console.WriteLine("<>{0}<>", afterWord);
                 Console.WriteLine("<>{0}/{1}<>", tried,tries);
                 Console.WriteLine("<>Word length is: {0}<>",beforeWord.Length);
@@ -77,7 +78,7 @@ namespace Main
                 }
                 catch (FormatException e)
                 {
-                    Console.Beep(); Console.WriteLine("Did you try just ONE letter?");
+                    Console.Beep(); Console.WriteLine("Format Exception: Please enter only one letter at a time");
                 }
             } while (unmatched);
 
